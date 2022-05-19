@@ -1,0 +1,23 @@
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  name: test-sliit
+spec:
+  selector:
+    matchLabels:
+      app: test-sliit
+  template:
+    metadata:
+      labels:
+        app: test-sliit
+    spec:
+      containers:
+      - name: sliit-2022-test 
+        image: prasad44/sliit-2022-test
+        resources: 
+          limits:
+            memory: "521Mi"
+            cpu: "500m"
+        ports:
+          - containerPort: 3000
+      
