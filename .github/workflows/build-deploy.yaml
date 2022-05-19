@@ -1,12 +1,10 @@
 name: Docker Build Deploy
-
 on:
   push:
     branches: [ main ]
 jobs:
   build:
     runs-on: ubuntu-latest
-
     steps:
     - uses: actions/checkout@v3
     - name: run shell script
@@ -23,15 +21,12 @@ jobs:
         file: ./Dockerfile
         push: true
         tags: ${{ secrets.DOCKER_USERNAME }}/sliit-2022-test:${{ github.sha }}
-
-
     - name: Azure Kubernetes set context
       uses: Azure/aks-set-context@v1
       with:
         creds: '${{secrets.AZURE_CREDENTIAL}}'
         resource-group: ctse
-        cluster-name: microservice-cluster
-        
+        cluster-name: microservice-cluster        
     - name: Create secret in Kubernetes cluster
       uses: Azure/k8s-create-secret@v1.1
       with:
@@ -40,7 +35,6 @@ jobs:
         container-registry-password: '${{secrets.DOCKER_TOKEN}}'
         secret-type: docker-registry
         secret-name: docker-image-pull-secret
-
     - name: Deploy to Kubernetes cluster
       uses: Azure/k8s-deploy@v1
       with:
