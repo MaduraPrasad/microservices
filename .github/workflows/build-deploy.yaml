@@ -22,7 +22,7 @@ jobs:
         context: .
         file: ./Dockerfile
         push: true
-        tags: ${{ secrets.DOCKER_USERNAME }}/ctse-shop-customer:${{ github.sha }}
+        tags: ${{ secrets.DOCKER_USERNAME }}/sliit-2022-test:${{ github.sha }}
 
 
     - name: Azure Kubernetes set context
